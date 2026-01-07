@@ -35,10 +35,21 @@ CREATE TABLE messy(Transaction_ID int,
                       products VARCHAR(100));
                       
 
--- Import CSV data into Messy Table         
-LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Proj6DataMessy.csv'
+-- --------------------------------------------------
+-- Import raw retail transaction data into staging table
+--
+-- NOTE:
+-- Raw CSV files are stored locally and are NOT included in this repository.
+-- Users must place the CSV file in their own MySQL `secure_file_priv` (Uploads)
+-- directory and update the file path below accordingly.
+--
+-- Example default path (Windows, MySQL 8.0):
+-- C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/
+-- --------------------------------------------------
+
+LOAD DATA INFILE 'path/to/retail_transactions_raw.csv'
 INTO TABLE messy
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
-IGNORE 1 LINES;                      
+IGNORE 1 LINES;
