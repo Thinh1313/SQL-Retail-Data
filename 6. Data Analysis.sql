@@ -105,7 +105,7 @@ FROM monthly_earnings;
 
 
 
--- 9. View product type with the highest to lowest revenue share percentage.
+-- 9. View product type with the highest to lowest revenue share percentage in Electronics.
 SELECT p.product_type, ROUND(SUM(total_amount)) AS product_revenue, ROUND(SUM(t.total_amount) / SUM(SUM(t.total_amount)) OVER (), 4) AS revenue_share
 FROM retail.transactions t
 JOIN retail.product p

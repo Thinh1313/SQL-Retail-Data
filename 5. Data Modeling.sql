@@ -4,12 +4,9 @@
 CREATE TABLE customer(
 customer_id INT AUTO_INCREMENT PRIMARY KEY,
 `Name` VARCHAR(100),
-`Email` VARCHAR(100),
-Phone BIGINT,
-Address VARCHAR(100),
-CITY VARCHAR(100),
-State VARCHAR(100),
-Zipcode INT,
+`Email` VARCHAR(100), 
+Phone VARCHAR(100), 
+Address VARCHAR(100), 
 Country VARCHAR(100),
 Age INT,
 Gender VARCHAR(100),
@@ -18,8 +15,8 @@ Customer_Segment VARCHAR(100)
 );
 
 INSERT INTO customer(
-`Name`, Email, Phone, Address, CITY, State, Zipcode, Country, Age, Gender, Income, Customer_Segment)
-SELECT DISTINCT `Name`, Email, Phone, Address, CITY, State, Zipcode, Country, Age, Gender, Income, Customer_Segment
+`Name`,`Email`, Phone, Address, Country, Age, Gender, Income, Customer_Segment)
+SELECT DISTINCT `Name`,`Email`, Phone, Address, Country, Age, Gender, Income, Customer_Segment
 FROM retail.clean2;
 
 
@@ -31,7 +28,7 @@ Product_Category VARCHAR(100),
 Product_Brand VARCHAR(100),
 Product_Type VARCHAR(100),
 products VARCHAR(100)
-)
+);
 
 INSERT INTO Product(
 Product_Category, product_brand, product_type, products)
@@ -46,8 +43,6 @@ Transaction_id INT PRIMARY KEY,
 Customer_id INT,
 product_id INT,
 `Date` DATE,
-`Year` INT,
-`Month` VARCHAR(100),
 `time` TIME,
 Amount DOUBLE,
 total_amount DOUBLE,
@@ -66,8 +61,6 @@ transaction_id,
 customer_id,
 product_id,
 `Date`,
-`Year`,
-`Month`,
 `Time`,
 Amount,
 total_amount,
@@ -77,7 +70,7 @@ payment_method,
 order_status,
 Ratings
 )
-SELECT rc.transaction_id, c.customer_id, p.product_id, rc.`Date`, rc.`Year`, rc.`Month`, rc.`Time`, rc.amount, rc.total_amount, rc.feedback, rc.shipping_method, rc.payment_method, rc.order_status, rc.ratings
+SELECT rc.transaction_id, c.customer_id, p.product_id, rc.`Date`, rc.`Time`, rc.amount, rc.total_amount, rc.feedback, rc.shipping_method, rc.payment_method, rc.order_status, rc.ratings
 FROM retail.clean2 rc
 JOIN customer c
 ON rc.`name` = c.`name`
