@@ -1,7 +1,6 @@
 -- Standardize Data
-SELECT * FROM retail.clean2 
 
--- Assign `date` as date data type and match year and month to `date`
+-- Correctly assign date data type
 ALTER TABLE retail.clean2
 ADD COLUMN date_new DATE;
 
@@ -17,12 +16,12 @@ MODIFY COLUMN date_new DATE AFTER Customer_Segment;
 ALTER TABLE retail.clean2
 RENAME COLUMN date_new TO `Date`;
 
--- Correct year values
+-- Assign year value from date
 UPDATE retail.clean2
 SET `Year` = YEAR(`Date`)
 WHERE `Date` IS NOT NULL;
 
--- Correct month values
+-- Assign month value from date
 UPDATE retail.clean2
 SET `Month` = MONTHNAME(`Date`)
 WHERE `Date` IS NOT NULL;
@@ -51,12 +50,10 @@ SET total_amount = ROUND(total_amount,2)
 WHERE total_amount IS NOT NULL;
 
 
--- FIX NULLs for product category, brand, and type
--- Product_type has no NULLs. Assign product_category values by evaluating its brand.
--- Home Decor (Bed Bath & Beyond, Home Depot, IKEA), Grocery(Pepsi, Coca-Cola, Nestle), Electronics(Samsung, Sony, Apple, Whirepool, Mitsubhisi, Bluestar), Clothing(Zara, Nike, Adidas),Books(HarperCollins,Penguin Books, Random House)
+-- FIX NULLs for product category by evaluating product brand
 
 
--- Fill in product_category Nulls first
+-- Fill in product_category Nulls 
 UPDATE retail.clean2
 SET product_category = "Home Decor"
 WHERE product_category IS NULL AND product_brand IN("Bed Bath & Beyond", "Home Depot", "IKEA");
@@ -77,13 +74,7 @@ UPDATE retail.clean2
 SET product_category = "Books"
 WHERE product_category IS NULL AND product_brand IN ("Penguin Books","Random House","HarperCollins");
 
-
--- UNIQUE in each product_type
--- BB&B(Kitchen, Bedding, Bathroom), IKEA(Lighting), Home Depot(Tools)
--- Nestle (Coffee, Chocolate, Snacks)
--- Whirepool(Fridge), Mitsubhisi(Mitsubhisi 1.5 Ton 3 Star Split AC), Sony(Headphones), Apple(Laptop), Bluestar(BlueStar AC)
--- Zara(Shirt,Jeans,Dress), Nike(Shorts), Adidas(Jacket)
--- Penguin Books(Children's), HarperCollins(Thriller), Random House(Literature)
+-- Fill product_brand by evaluating unique product_type
 
 -- Books
 UPDATE retail.clean2
@@ -151,7 +142,7 @@ SET product_brand = "Nestle"
 WHERE product_brand IS NULL AND product_type IN("Coffee","Snacks","Chocolate");
 
 
--- When Feedback is NULL, rating is also NULL. Meaning that customer most likely didn't leave a review.
+-- When Feedback is NULL, rating is also NULL. Customers most likely didn't leave a review.
 UPDATE retail.clean2
 SET Feedback = "NA"
 WHERE Feedback IS NULL;
@@ -161,8 +152,6 @@ SET Gender = "Unknown"
 WHERE Gender IS NULL;
 
 -- Feedback and Rating follow a pattern. Bad(1), Average(2), Good(3 or 4), Excellent(4 or 5)
-
-
 UPDATE retail.clean2
 SET ratings = 3.5
 WHERE Feedback = "Good" AND ratings IS NULL;

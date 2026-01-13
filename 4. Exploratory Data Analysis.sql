@@ -1,5 +1,4 @@
 -- Exploratory Data Analysis
-SELECT * FROM retail.clean2
 
 -- Find the amount of nulls for each column.
 SELECT
@@ -62,7 +61,7 @@ WHERE total_amount IS NOT NULL AND Amount IS NOT NULL AND Total_purchases IS NOT
 SELECT MIN(age) AS Youngest, MAX(age) AS Oldest, COUNT(*) AS total_transactions, SUM(AGE < 13) AS under_13, SUM(AGE BETWEEN 13 AND 17) AS teens, SUM(AGE > 100) AS over_100
 FROM retail.clean2;
 
--- premium does not equal highest income. Most customers fall into regular customer segment and have low to medium income.
+-- premium does not mean highest income. Most customers fall into regular customer segment and have low to medium income.
 SELECT customer_segment, Income, COUNT(*) AS amount
 FROM retail.clean2
 WHERE customer_segment IS NOT NULL AND Income IS NOT NULL
@@ -98,6 +97,7 @@ GROUP BY Feedback
 ORDER BY average_rating DESC;
 
 -- City and State are broken and not useful data. Many city values had large amounts of incorrect state values.
+-- Don't use city and state columns in analysis
 SELECT Country, CITY, State, count(*) AS amount
 FROM retail.clean2
 WHERE city = "San Diego"

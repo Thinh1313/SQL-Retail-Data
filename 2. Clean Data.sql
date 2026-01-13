@@ -1,4 +1,6 @@
--- DELETE exact duplicates (4 rows)
+-- Data Cleaning
+
+-- Delete exact duplicates 
 CREATE TABLE clean1 AS
 SELECT *
 FROM ( 
@@ -10,16 +12,12 @@ FROM retail.messy
 ) clean
 WHERE rownumber = 1;
 
--- Delete transaction_ID nulls (333 rows)
+-- Delete transaction_id nulls 
 DELETE 
 FROM retail.clean1 
 WHERE transaction_ID IS NULL
 
 
-
--- Two transaction_id duplicates
--- 1. Transaction_ID is the same. Everything in the row is the same besides a few columns
--- 2. Transaction_ID is the same. Everything else is different
 -- Create a flag for transaction_id duplicates
 ALTER TABLE clean1
 ADD COLUMN transaction_duplicate INT DEFAULT 0;
@@ -35,7 +33,7 @@ WHERE transaction_id IN (
 );
 
 
--- IDENTIFY type of flag
+-- Identify the type of flag
 ALTER TABLE clean1
 ADD COLUMN same_transactionid_different_customer INT DEFAULT 0;
 
