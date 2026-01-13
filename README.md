@@ -44,7 +44,7 @@ For analysis, the data was normalized into three relational tables to better ref
 - Analyzed temporal patterns, including yearly and monthly transaction volume trends
 - Identified and documented data quality issues, including inconsistent city-state mappings
 
-![Missing Values Per Column](images/distribution_of_missing_values.png)
+![Missing Values Per Column](images/Distribution_of_missing_values.png)
 
 # Data Modeling
 - Normalized the cleaned dataset into three relational tables: customer, product, and transactions
