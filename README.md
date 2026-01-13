@@ -44,6 +44,8 @@ For analysis, the data was normalized into three relational tables to better ref
 - Analyzed temporal patterns, including yearly and monthly transaction volume trends
 - Identified and documented data quality issues, including inconsistent city-state mappings
 
+![Missing Values Per Column](images/distribution_of_missing_values.png)
+
 # Data Modeling
 - Normalized the cleaned dataset into three relational tables: customer, product, and transactions
 - Generated surrogate primary keys for customers and products to resolve duplication and ensure uniqueness
@@ -56,6 +58,7 @@ For analysis, the data was normalized into three relational tables to better ref
 # Analysis
 - Quantified overall business performance including total revenue, order volume, and average order value by customer segment
 - Analyzed revenue concentration using deciles and cumulative share metrics to identify high-impact customers
+![Customer Revenue Concentration Curve](images/customer_revenue_concentration_curve.png)
 - Segmented customers into spending tiers and evaluated transaction behavior across segments
 - Identified top-performing customers within each customer segment
 - Evaluated revenue contribution by brand, category, and product type, including focused analysis on Electronics
