@@ -62,6 +62,7 @@ For analysis, the data was normalized into three relational tables to better ref
 - Segmented customers into spending tiers and evaluated transaction behavior across segments
 - Identified top-performing customers within each customer segment
 - Evaluated revenue contribution by brand, category, and product type, including focused analysis on Electronics
+![Category Level Revenue Contribution](images/category_level_revenue_contribution.png)
 - Analyzed geographic revenue distribution and concentration across countries
 - Measured month-to-month revenue growth from March 2023 to February 2024
 
